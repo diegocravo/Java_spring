@@ -1,0 +1,122 @@
+<html
+	xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+	<title>Cadastro - Orange Tools</title>
+	  <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+	<body>	
+		<header>
+		<nav>
+		    <div class="nav-wrapper">
+		      <a href="#" class="brand-logo">Usuário</a>
+		      <ul id="nav-mobile" class="right hide-on-med-and-down">
+		        <li>
+					<a href="/usuarios" class="waves-effect waves-light btn">
+						<i class="material-icons left">arrow_back</i>
+						Lista de Usuários
+					</a>
+		        </li>
+		      </ul>
+		    </div>
+		 </nav>
+		 </header>
+		
+		<div th:each="usuario : ${usuario}" class="container">
+			<div class="row">
+				<p>CPF - <span th:text="${usuario.cpf}"></span></p>
+				<p>Nome - <span th:text="${usuario.nome}"></span></p>
+				<p>Email - <span th:text="${usuario.email}"></span></p>
+				<p>Data Nascimento - <span th:text="${usuario.DataNascimento}"></span></p>
+			</div>
+			
+			<th:block th:include="mensagemValidacao"></th:block>
+			
+			<form method="POST">
+				Logradouro: <input type="text" value ="" name="logradouro" />
+				Numero: <input type="number" value ="" name="numero" />
+				Complemento: <input type="text" value ="" name="complemento" />
+				Bairro: <input type="text" value ="" name="bairro" />
+				Cidade: <input type="text" value ="" name="cidade" />
+				Estado: <input type="text" value ="" name="estado" />
+				CEP: <input type="text" value ="" name="CEP" />
+				<button class="waves-effect waves-light btn" type="submit">Adicionar</button>
+			</form>
+		</div>
+		
+		<div class="container">
+			<h5>Lista de Endereços</h5>
+			<div class="row">
+				<div class="input-field col s2">
+					<h6>LOGRADOURO</h6>
+				</div>
+				<div class="input-field col s1">
+					<h6>NUMERO</h6>
+				</div>
+				<div class="input-field col s2">
+					<h6>COMPLEMENTO</h6>
+				</div> 
+				<div class="input-field col s2">
+					<h6>BAIRRO</h6>
+				</div>
+				<div class="input-field col s2">
+					<h6>CIDADE</h6>
+				</div>
+				<div class="input-field col s1">
+					<h6>ESTADO</h6>
+				</div>
+				<div class="input-field col s1">
+					<h6>CEP</h6>
+				</div>
+				<div class="input-field col s1">
+					<h6>DELETAR</h6>
+				</div>
+			</div>
+			<div th:each="endereco : ${enderecos}">
+			<div class="row">
+				<div class="input-field col s2">
+					<p><span th:text="${endereco.logradouro}"></span></p>
+				</div>
+				<div class="input-field col s1">
+					<p><span th:text="${endereco.numero}"></span></p>
+				</div>
+				<div class="input-field col s2">
+					<p><span th:text="${endereco.complemento}"></span></p>
+				</div> 
+				<div class="input-field col s2">
+					<p><span th:text="${endereco.bairro}"></span></p>
+				</div>
+				<div class="input-field col s2">
+					<p><span th:text="${endereco.cidade}"></span></p>
+				</div>
+				<div class="input-field col s1">
+					<p><span th:text="${endereco.estado}"></span></p>
+				</div>
+				<div class="input-field col s1">
+					<p><span th:text="${endereco.CEP}"></span></p>
+				</div>
+				<div class="input-field col s1">
+					<a 
+						th:href="${(#mvc.url('UC#deletarEndereco').arg(0, endereco.codigo)).build()}"
+						class="waves-effect waves-light btn-small"
+					>
+					<i class="material-icons left">delete</i>
+					</a>
+				</div>
+			</div>
+			</div>
+		</div>
+
+		<!--JavaScript at end of body for optimized loading-->
+    	<script type="text/javascript" src="js/materialize.min.js"></script>
+	</body>
+
+</html>
